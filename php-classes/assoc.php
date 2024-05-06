@@ -22,34 +22,35 @@
             ],
             [
                 "Name" => "Monis",
-                "Course" => "Full Stack Development",
+                "Course" => "Mern Stack Development",
                 "Joining Date" => "2024-04-29"
             ],
             [
                 "Name" => "Monis",
                 "Course" => "Full Stack Development",
-                "Joining Date" => "2024-04-29"
+                "Joining Date" => "2024-02-29"
             ]
         ]
     ?>
     <table border=1>
         <thead>
             <tr>
-            <?php
-                foreach($assoc as $key => $val){
-                    echo "<th><strong>" . $key . "</strong></th>";
-                }
-            ?>
+                <th> <strong>Name</strong></th>
+                <th> <strong>Course</strong></th>
+                <th> <strong>Joining Date</strong></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-    <?php
-        foreach($assoc as $key => $val){
-            echo "<td style='padding:20px;'>" . $val . "</td>";
-        }
-    ?>      
-            </tr>
+            <?php
+                foreach($assoc as $assoc){
+                    echo "<tr>";
+                
+                    foreach($assoc as $key => $val){
+                        echo "<td style='padding:20px;'>" . $val . "</td>";
+                    }
+                    echo "</tr>";
+                } 
+            ?> 
         </tbody>
     </table>
 </body>
