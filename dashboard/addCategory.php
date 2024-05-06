@@ -10,13 +10,12 @@
                     <h6 class="mb-4">Add Category</h6>
                     <form>
                         <div class="mb-3">
-                            <label for="categoryName" class="form-label">Category Name<span>*</span></label>
+                            <label for="categoryName" class="form-label">Category Name<span style="color:red;"> *</span></label>
                             <input type="text" placeholder="Category Name" class="form-control" id="categoryName" required>
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div>
+                            
                         </div>
                         <div class="mb-3">
-                            <label for="CategoryImg" class="form-label">Category Image</label>
+                            <label for="CategoryImg" class="form-label">Category Image<span style="color:red;"> *</span></label>
                             <input type="file" class="form-control" id="CategoryImg" required>
                         </div>
                         <!-- <div class="mb-3 form-check">
