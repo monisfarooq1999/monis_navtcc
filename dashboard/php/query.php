@@ -1,5 +1,6 @@
 <?php
 include("config.php");
+$catimgref = "img/category/";
 if(isset($_POST['addCategory'])){
     $catName = $_POST['catName'];
     $catimg = $_FILES['cimage']['name'];
