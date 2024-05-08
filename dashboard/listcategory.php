@@ -29,7 +29,7 @@
                                         <td><?php echo  $cat_row['catName']?></td>
                                         <td><img src="<?php echo  $catimgref.$cat_row['catImg'];?>" alt="" width="50px"></td>
                                         <td><a href="updatecategory.php?cid=<?php echo $cat_row['catid'] ?>" class="btn btn-info">Edit</a></td>
-                                        <td><a href="" class="btn btn-danger">Delete</a></td>
+                                        <td><a href="?deleteKey=<?php echo $cat_row['catid'] ?>" class="btn btn-danger">Delete</a></td>
                                     </tr>
                             <?php
                                 }
