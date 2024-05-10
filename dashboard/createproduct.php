@@ -47,7 +47,7 @@
                                         foreach($cat_row as $cat_row){
 
                                     ?>
-                                        <option><?php echo  $cat_row['catName']?></option>
+                                        <option value="<?php echo  $cat_row['catid']?>"><?php echo  $cat_row['catName']?></option>
                             <?php
                                 }
                             ?>
@@ -63,7 +63,7 @@
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div> -->
-                        <button type="submit" class="btn btn-primary" name="addCategory">Add Category</button>
+                        <button type="submit" class="btn btn-primary" name="addProduct">Add Product</button>
                     </form>
                 </div>
             </div>

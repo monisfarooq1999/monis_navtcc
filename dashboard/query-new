@@ -1,0 +1,41 @@
+//Add product
+if(isset($_POST['addproduct'])){
+$productName = $_POST['pName'];
+$productPrice = $_POST['pPrice'];
+$productDescription = $_POST['pDescription'];
+$productQuantity = $_POST['pQuantity'];
+$productCatid = $_POST['pCatid'];
+$productImageName = $_FILES['pImage']["name"];
+$productTmpName = $_FILES['pImage']["tmp_name"];
+$extension = pathinfo($productImageName,PATHINFO_EXTENSION);
+$desig = "img/product/".$productImageName;
+if($extension =="jpg" || $extension =="png" || $extension == "jpeg" || $extension =="webp") {
+    if(move_uploaded_file($productTmpName,$desig)){
+        $query = $pdo->prepare("INSERT INTO `products`(`productname`, `productquantity`, `productprice`, `productdescription`, `productimage`, `productcatid`) VALUES(:pn,:pq,:pp,:pd,:pi,:pc)");
+        $query->bindParam("pn", $productName);
+        $query->bindParam("pq", $productQuantity);
+        $query->bindParam("pp", $productPrice);
+        $query->bindParam("pd", $productDescription);
+        $query->bindParam("pi", $productImageName);
+        $query->bindParam("pc", $productCatid);
+        $query->execute();
+        echo "<script>alert('product added successfully')</script>";
+
+    }else
+    {
+        echo "<script>alert('invalid file type')</script>";
+    
+    }
+}
+}
+//delete product
+if(isset($_GET['prodeleteKey'])){
+    $proid = $_GET['prodeleteKey'];
+    $query= $pdo->prepare("DELETE FROM products Where productid = :pid");
+    $query->bindParam("pid", $proid);
+    $query->execute();
+    echo "<script>alert('Product Deleted');
+    location.assign('viewproducts.php')
+    </script>";
+    
+    }
