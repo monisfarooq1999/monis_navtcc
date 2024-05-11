@@ -49,21 +49,12 @@ if(isset($_GET['pid'])){
                                 <label for="productCat" class="form-label">Product Category</label>
                                 <select type="text" placeholder="Product Category" class="form-control" name="prodcat" id="productCat" >
                                 <?php
-                                $query = $pdocon->query(" SELECT `products`.*, `categories`.`catName`
-                                FROM `products` 
-                                INNER JOIN `categories` ON `products`.`productcatid` = `categories`.`catid`;");
-                                    $prodrow = $query->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach($prodrow as $prodrow){
+                                $query = $pdocon->query(" SELECT * FROM categories");
+                                    $catprodrow = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach($catprodrow as $catprodrow){
                                         ?>
-                                <option  value="<?php echo  $prodrow['productcatid']?>" ><?php echo  $prodrow['catName']?></option>
-                                <?php
-                                    }
-                                    $selectedProductCatId = $prodrow['productcatid'];
-                                    $query = $pdocon->query("SELECT * FROM categories WHERE catid != $selectedProductCatId");
-                                    $catotherrow = $query->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach($catotherrow as $cat_row){
-                                    ?>
-                                        <option value="<?php echo  $cat_row['catid']?>"><?php echo  $cat_row['catName']?></option>
+                                <option  value="<?php echo  $catprodrow['catid']?>" <?= $prodData['productcatid'] == $catprodrow['catid'] ? 'selected' : "" ?> ><?php echo  $catprodrow['catName']?></option>
+                                
                             <?php
                                 }
                             ?>

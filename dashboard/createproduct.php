@@ -27,7 +27,7 @@
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="productsalePrice" class="form-label">Product Sale Price</label>
-                            <input type="text" placeholder="Product Sale Price" class="form-control" name="prodsaleprice" id="productsalePrice"></input>
+                            <input type="text" placeholder="Product Sale Price" class="form-control" name="prodsaleprice" id="productsalePrice" max=""></input>
                             
                         </div>
                         </div>
@@ -40,7 +40,7 @@
                             <div class="mb-3 col-md-6">
                                 <label for="productCat" class="form-label">Product Category</label>
                                 <select type="text" placeholder="Product Category" class="form-control" name="prodcat" id="productCat" >
-                                <option>Select Category</option>
+                                <option selected hidden>Select Category</option>
                                 <?php
                                     $query = $pdocon->query(" SELECT * FROM categories");
                                     $cat_row = $query->fetchAll(PDO::FETCH_ASSOC);

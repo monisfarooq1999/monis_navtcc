@@ -83,6 +83,7 @@ $productTmpName = $_FILES['prodimage']["tmp_name"];
 $extension = pathinfo($productImageName,PATHINFO_EXTENSION);
 $desig = "img/product/".$productImageName;
     if(move_uploaded_file($productTmpName,$desig)){
+        if(!empty( $_POST['prodsaleprice'])){
         $query = $pdocon->prepare("INSERT INTO `products`(`productname`, `productqty`, `productregprice`,`productsaleprice`, `productdesc`, `productimg`, `productcatid`) VALUES(:pn,:pq,:prp,:psp,:pd,:pi,:pc)");
         $query->bindParam("pn", $productName);
         $query->bindParam("pq", $productQuantity);
@@ -94,6 +95,19 @@ $desig = "img/product/".$productImageName;
         $query->execute();
         echo "<script>alert('product added successfully')
         location.assign('listproducts.php')</script>";
+        }
+        else{
+            $query = $pdocon->prepare("INSERT INTO `products`(`productname`, `productqty`, `productregprice`, `productdesc`, `productimg`, `productcatid`) VALUES(:pn,:pq,:prp,:pd,:pi,:pc)");
+            $query->bindParam("pn", $productName);
+            $query->bindParam("pq", $productQuantity);
+            $query->bindParam("prp", $productregPrice);
+            $query->bindParam("pd", $productDescription);
+            $query->bindParam("pi", $productImageName);
+            $query->bindParam("pc", $productCatid);
+            $query->execute();
+            echo "<script>alert('product Updated successfully')
+            location.assign('listproducts.php')</script>";
+        }
 
     }else
     {
@@ -118,6 +132,7 @@ if(isset($_POST['updateProduct'])){
         $extension = pathinfo($productImageName,PATHINFO_EXTENSION);
         $desig = "img/product/".$productImageName;
         if(move_uploaded_file($productTmpName,$desig)){
+            if(!empty( $_POST['prodsaleprice'])){
             $query = $pdocon->prepare("UPDATE `products` SET productname = :pn, productqty = :pq , productregprice = :prp , productsaleprice = :psp , productdesc = :pd , productimg = :pi , productcatid = :pc WHERE productid = :pid");
             $query->bindParam("pid", $prodId);
             $query->bindParam("pn", $productName);
@@ -130,6 +145,20 @@ if(isset($_POST['updateProduct'])){
             $query->execute();
             echo "<script>alert('product Updated successfully')
             location.assign('listproducts.php')</script>";
+            }
+            else{
+                $query = $pdocon->prepare("UPDATE `products` SET productname = :pn, productqty = :pq , productregprice = :prp , productdesc = :pd , productimg = :pi , productcatid = :pc WHERE productid = :pid");
+                $query->bindParam("pid", $prodId);
+                $query->bindParam("pn", $productName);
+                $query->bindParam("pq", $productQuantity);
+                $query->bindParam("prp", $productregPrice);
+                $query->bindParam("pd", $productDescription);
+                $query->bindParam("pi", $productImageName);
+                $query->bindParam("pc", $productCatid);
+                $query->execute();
+                echo "<script>alert('product Updated successfully')
+                location.assign('listproducts.php')</script>";
+            }
     
         }
         else
@@ -140,19 +169,33 @@ if(isset($_POST['updateProduct'])){
     
     }
     else{
-        $query = $pdocon->prepare("UPDATE `products` SET productname = :pn, productqty = :pq , productregprice = :prp , productsaleprice = :psp , productdesc = :pd , productcatid = :pc WHERE productid = :pid");
-        $query->bindParam("pid", $prodId);
-        $query->bindParam("pn", $productName);
-        $query->bindParam("pq", $productQuantity);
-        $query->bindParam("prp", $productregPrice);
-        $query->bindParam("psp", $productsalePrice);
-        $query->bindParam("pd", $productDescription);
-        $query->bindParam("pc", $productCatid);
-        $query->execute();
-        echo "<script>alert('Product Updated without image');
-        location.assign('listproducts.php');
-        </script>";
-
+        if(!empty( $_POST['prodsaleprice'])){
+            $query = $pdocon->prepare("UPDATE `products` SET productname = :pn, productqty = :pq , productregprice = :prp , productsaleprice = :psp , productdesc = :pd , productcatid = :pc WHERE productid = :pid");
+            $query->bindParam("pid", $prodId);
+            $query->bindParam("pn", $productName);
+            $query->bindParam("pq", $productQuantity);
+            $query->bindParam("prp", $productregPrice);
+            $query->bindParam("psp", $productsalePrice);
+            $query->bindParam("pd", $productDescription);
+            $query->bindParam("pc", $productCatid);
+            $query->execute();
+            echo "<script>alert('Product Updated without image');
+            location.assign('listproducts.php');
+            </script>";
+        }
+        else{
+            $query = $pdocon->prepare("UPDATE `products` SET productname = :pn, productqty = :pq , productregprice = :prp , productdesc = :pd , productcatid = :pc WHERE productid = :pid");
+            $query->bindParam("pid", $prodId);
+            $query->bindParam("pn", $productName);
+            $query->bindParam("pq", $productQuantity);
+            $query->bindParam("prp", $productregPrice);
+            $query->bindParam("pd", $productDescription);
+            $query->bindParam("pc", $productCatid);
+            $query->execute();
+            echo "<script>alert('Product Updated without image');
+            location.assign('listproducts.php');
+            </script>";
+        }
     }
 }
     
