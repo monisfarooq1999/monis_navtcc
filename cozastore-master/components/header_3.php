@@ -176,25 +176,30 @@
 						</a>
 					</li>
 					<li class="p-b-13">
-                        <a href="my_account.php" class="stext-102 cl2 hov-cl1 trans-04">
+                        <a href="account-login.php" class="stext-102 cl2 hov-cl1 trans-04">
+							Login/Sign Up
+						</a>
+					</li>
+					<li class="p-b-13">
+                        <a href="my-account.php" class="stext-102 cl2 hov-cl1 trans-04">
 							Customer Dashboard
 						</a>
 					</li>
 
 					<li class="p-b-13">
-						<a href="my_account.php" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="customer-orders.php" class="stext-102 cl2 hov-cl1 trans-04">
 							Track Oder
 						</a>
 					</li>
 
 					<li class="p-b-13">
-						<a href="my_account.php" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="customer-orders.php" class="stext-102 cl2 hov-cl1 trans-04">
 							Refunds
 						</a>
 					</li>
 
 					<li class="p-b-13">
-						<a href="my_account.php" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
 							Help & FAQs
 						</a>
 					</li>

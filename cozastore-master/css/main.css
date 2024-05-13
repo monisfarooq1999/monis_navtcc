@@ -3024,12 +3024,33 @@ input.num-product::-webkit-inner-spin-button {
     left: auto;
   }
 }
-
+.required{
+  color: red;
+}
 .how-bor2::before {
   bottom: -21px;
   right: -21px;
 }
+.wrap-table-my-orders {
+  border: 1px solid #b3b3b3;
+}
 
+table.table-my-orders tr th , table.table-my-orders tr td 
+{
+  padding: 10px;
+  font-size: 16px;
+}
+tr.table_row {
+  border-top: 1px solid #b3b3b3;
+}
+
+table.table-my-orders {
+  width: 100%;
+}
+
+table.table-my-orders tr.table_head th {
+  font-size: 18px;
+}
 
 
 /*==================================================================

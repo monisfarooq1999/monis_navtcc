@@ -179,32 +179,61 @@
 							My Wishlist
 						</a>
 					</li>
+					<?php
+						if(isset($_SESSION['sessemail'])){
+							if($_SESSION['sessrole'] == "admin"){
+						
+						?>
 
 					<li class="p-b-13">
 						<a href="../dashboard" class="stext-102 cl2 hov-cl1 trans-04">
 						Admin Area
 						</a>
 					</li>
+					<?php
+							}
+						}
+						if(!isset($_SESSION['sessemail'])){
+						
+						?>
 					<li class="p-b-13">
-						<a href="my_account.php" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="account-login.php" class="stext-102 cl2 hov-cl1 trans-04">
+						Login/Sign Up
+						</a>
+					</li>
+					<?php
+						}
+						if(isset($_SESSION['sessemail'])){
+						
+						?>
+					<li class="p-b-13">
+						<a href="my-account.php" class="stext-102 cl2 hov-cl1 trans-04">
 						Customer Dashboard
 						</a>
 					</li>
-
 					<li class="p-b-13">
-						<a href="my_account.php" class="stext-102 cl2 hov-cl1 trans-04">
-							Track Oder
+						<a href="customer-orders.php" class="stext-102 cl2 hov-cl1 trans-04">
+							Logout
 						</a>
 					</li>
 
 					<li class="p-b-13">
-						<a href="my_account.php" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="customer-orders.php" class="stext-102 cl2 hov-cl1 trans-04">
+							Track Order
+						</a>
+					</li>
+
+					<li class="p-b-13">
+						<a href="customer-orders.php" class="stext-102 cl2 hov-cl1 trans-04">
 							Refunds
 						</a>
 					</li>
+					<?php
+						}
+						?>
 
 					<li class="p-b-13">
-						<a href="my_account.php" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
 							Help & FAQs
 						</a>
 					</li>

@@ -15,14 +15,37 @@
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
 						</a>
-
+						<?php
+						if(isset($_SESSION['sessemail'])){
+							if($_SESSION['sessrole'] == "admin"){
+						
+						?>
 						<a href="../dashboard" class="flex-c-m p-lr-10 trans-04">
 							Admin Area
 						</a>
-                        <a href="my_account.php" class="flex-c-m p-lr-10 trans-04">
+						<?php
+							}
+						}
+						if(!isset($_SESSION['sessemail'])){
+						
+						?>
+                        <a href="account-login.php" class="flex-c-m p-lr-10 trans-04">
+							Login/Sign Up
+						</a>
+						<?php
+						}
+						if(isset($_SESSION['sessemail'])){
+						
+						?>
+						<a href="my-account.php" class="flex-c-m p-lr-10 trans-04">
 							Customer Dashboard
 						</a>
-
+						<a href="logout.php" class="flex-c-m p-lr-10 trans-04">
+							Logout
+						</a>
+						<?php
+						}
+						?>
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
 						</a>
@@ -139,13 +162,37 @@
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							Help & FAQs
 						</a>
-
+						<?php
+						if(isset($_SESSION['sessemail'])){
+							if($_SESSION['sessrole'] == "admin"){
+						
+						?>
 						<a href="../dashboard" class="flex-c-m p-lr-10 trans-04">
 							Admin Area
 						</a>
-                        <a href="my_account.php" class="flex-c-m p-lr-10 trans-04">
+						<?php
+							}
+						}
+						if(!isset($_SESSION['sessemail'])){
+						
+						?>
+                        <a href="account-login.php" class="flex-c-m p-lr-10 trans-04">
+							Login/Sign Up
+						</a>
+						<?php
+						}
+						if(isset($_SESSION['sessemail'])){
+						
+						?>
+						<a href="my-account.php" class="flex-c-m p-lr-10 trans-04">
 							Customer Dashboard
 						</a>
+						<a href="logout.php" class="flex-c-m p-lr-10 trans-04">
+							Logout
+						</a>
+						<?php
+						}
+						?>
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							EN

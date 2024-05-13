@@ -19,7 +19,10 @@
 						<a href="../dashboard" class="flex-c-m p-lr-10 trans-04">
 							Admin Area
 						</a>
-                        <a href="my_account.php" class="flex-c-m p-lr-10 trans-04">
+						<a href="account-login.php" class="flex-c-m p-lr-10 trans-04">
+							Login/Sign Up
+						</a>
+                        <a href="my-account.php" class="flex-c-m p-lr-10 trans-04">
 							Customer Dashboard
 						</a>
 

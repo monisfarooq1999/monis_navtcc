@@ -1,5 +1,7 @@
 <?php
 include("config.php");
+session_start();
+// session_unset();
 $catimgref = "img/category/";
 $prodimgref = "img/product/";
 

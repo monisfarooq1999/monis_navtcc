@@ -1,10 +1,17 @@
 
+
 <?php
-	@include ("components/header.php");
+
+	include ("components/header.php");
+	if(isset($_SESSION['sessemail'])){
+		echo "<script>
+            location.assign('my-account.php');
+            </script>";
+	}
 ?>
 
 <?php
-	@include ("components/header_1.php");
+	include ("components/header_1.php");
 ?>
 	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
@@ -52,7 +59,7 @@
 				</div>
 
 				<div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
-					<form>
+					<form  method="post">
 						<h4 class="mtext-105 cl2 txt-center p-b-30">
 						Customer Login
 						</h4>
@@ -66,7 +73,7 @@
 							<img class="how-pos4 pointer-none" src="images/icons/password.png"  width="20px"  alt="ICON">
 						</div>
 
-						<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+						<button type="submit" name="userlogin" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
 							Login
 						</button>
 					</form>
@@ -75,15 +82,10 @@
 		</div>
 	</section>	
 	
-	
-	<!-- Map -->
-	<div class="map">
-		<div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787" data-pin="images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
-	</div>
 
 
 
 
 <?php
-	@include ("components/footer.php");
+	include ("components/footer.php");
 ?>

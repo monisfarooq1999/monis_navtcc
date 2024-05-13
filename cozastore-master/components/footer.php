@@ -42,25 +42,25 @@
 
 					<ul>
 						<li class="p-b-10">
-							<a href="my_account.php" class="stext-107 cl7 hov-cl1 trans-04">
+							<a href="customer-orders.php" class="stext-107 cl7 hov-cl1 trans-04">
 								Track Order
 							</a>
 						</li>
 
 						<li class="p-b-10">
-							<a href="my_account.php" class="stext-107 cl7 hov-cl1 trans-04">
+							<a href="customer-orders.php" class="stext-107 cl7 hov-cl1 trans-04">
 								Returns 
 							</a>
 						</li>
 
 						<li class="p-b-10">
-							<a href="my_account.php" class="stext-107 cl7 hov-cl1 trans-04">
+							<a href="customer-orders.php" class="stext-107 cl7 hov-cl1 trans-04">
 								Shipping
 							</a>
 						</li>
 
 						<li class="p-b-10">
-							<a href="my_account.php" class="stext-107 cl7 hov-cl1 trans-04">
+							<a href="my-account.php" class="stext-107 cl7 hov-cl1 trans-04">
 								Customer Dashboard
 							</a>
 						</li>
