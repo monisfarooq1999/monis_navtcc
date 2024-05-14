@@ -20,7 +20,38 @@ if(isset($_POST['userregister'])){
     $query->execute();
     echo "<script>alert('User Registration Successful Added');
     location.assign(login.php)</script>";
+}
+
+
+//user  update User
+if(isset($_POST['updatedetails'])){
+    $userid = $_POST['userid'];
+    $userfirstname = $_POST['firstname'];
+    $userlastname = $_POST['lastname'];
+    $useremail = $_POST['useremail'];
+    $userphone = $_POST['userphone'];
+    $query = $pdocon->prepare("UPDATE user SET firstname = :ufname, lastname = :ulname,  userphone = :uphone, useremail = :uemail WHERE userid = :uid");
+    $query->bindParam("uid",$userid);
+    $query->bindParam("ufname",$userfirstname);
+    $query->bindParam("ulname",$userlastname);
+    $query->bindParam("uemail",$useremail);
+    $query->bindParam("uphone",$userphone);
+    $query->execute();
+    // Update session data if the update was successful
+    if ($query->rowCount() > 0) {
+        $_SESSION['firstname'] = $userfirstname;
+        $_SESSION['lastname'] = $userlastname;
+        $_SESSION['useremail'] = $useremail;
+        $_SESSION['userphone'] = $userphone;
+        echo "<script>alert('User Update Successful');
+        location.assign('my-account.php')</script>";
+    } else {
+        echo "<script>alert('User Update Failed');
+        location.assign('my-account.php')</script>";
     }
+}
+
+// user logins
     
 if(isset($_POST['userlogin'])){
     $useremail = $_POST['custemail'];

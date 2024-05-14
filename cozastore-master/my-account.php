@@ -47,7 +47,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="box bor10 account-details-wrapper m-t-40 p-lr-20 p-t-20 p-b-20">
+                    <!-- <div class="box bor10 account-details-wrapper m-t-40 p-lr-20 p-t-20 p-b-20">
                         <h2>My account</h2>
                         
                         <p class="lead m-t-10">Change your personal details or your password here.</p>
@@ -74,34 +74,33 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- /.row -->
 
                             <div class="col-sm-12 text-center">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save new password</button>
                             </div>
                         </form>
 
-                    </div>
+                    </div> -->
                     <div class="box bor10 account-details-wrapper m-t-40 p-lr-20 p-t-20 p-b-20">
                         <h3>Personal details</h3>
-                        <form>
+                        <form method="post">
+                            <input type="text" hidden value="<?php echo $_SESSION['sessid']?>" name="userid">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="firstname">Firstname</label>
-                                        <input type="text" class="form-control" id="firstname">
+                                        <label for="firstname">First Name</label>
+                                        <input type="text" class="form-control" id="firstname" value="<?php echo $_SESSION['sessfname']?>" name="firstname">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="lastname">Lastname</label>
-                                        <input type="text" class="form-control" id="lastname">
+                                        <label for="lastname">Last Name</label>
+                                        <input type="text" class="form-control" id="lastname" value="<?php echo $_SESSION['sesslname']?>" name="lastname">
                                     </div>
                                 </div>
                             </div>
-                            <!-- /.row -->
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="company">Company</label>
@@ -114,11 +113,10 @@
                                         <input type="text" class="form-control" id="street">
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /.row -->
+                            </div> -->
 
                             <div class="row">
-                                <div class="col-sm-6 col-md-3">
+                                <!-- <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label for="city">Company</label>
                                         <input type="text" class="form-control" id="city">
@@ -141,22 +139,22 @@
                                         <label for="country">Country</label>
                                         <select class="form-control" id="country"></select>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="phone">Telephone</label>
-                                        <input type="text" class="form-control" id="phone">
+                                        <input type="text" class="form-control" id="phone" value="<?php echo $_SESSION['sessphone']?>" name="userphone">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="text" class="form-control" id="email">
+                                        <input type="text" class="form-control" id="email" value="<?php echo $_SESSION['sessemail']?>" name="useremail">
                                     </div>
                                 </div>
                                 <div class="col-sm-12 text-center">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save changes</button>
+                                    <button type="submit" class="btn btn-primary" name="updatedetails"><i class="fa fa-save"></i> Save changes</button>
 
                                 </div>
                             </div>
