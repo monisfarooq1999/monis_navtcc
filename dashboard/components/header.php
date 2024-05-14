@@ -1,5 +1,16 @@
 <?php
 include("php/query.php");
+
+if(!$_SESSION['sessemail'] ){
+    echo "<script>
+        location.assign('../cozastore-master/');
+        </script>";
+}
+if($_SESSION['sessrole'] == "user" || $_SESSION['sessrole'] == "customer" ){
+    echo "<script>
+        location.assign('../cozastore-master/my-account.php');
+        </script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
