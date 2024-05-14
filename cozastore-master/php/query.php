@@ -43,7 +43,7 @@ if(isset($_POST['userlogin'])){
             location.assign('my-account.php');
             </script>";
         }
-        elseif($_SESSION['sessrole'] == "admin" ){
+        elseif($_SESSION['sessrole'] == "admin" || $_SESSION['sessrole'] == "superadmin" || $_SESSION['sessrole'] == "shop_manager" || $_SESSION['sessrole'] == "sales_person" ){
             echo "<script>alert('Admin Login Successful');
             location.assign('../dashboard/')</script>";
         }

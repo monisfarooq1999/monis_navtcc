@@ -17,13 +17,11 @@
     <section class="bg0 p-t-104 p-b-116">
 		<div class="container">
 			<div class="flex-w flex-tr">
-                <div class="col-sm-6 col-lg-4 col-xl-4 m-lr-auto m-b-50">
-                    <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-                        <?php
-                            @include ("components/customer-account-menu.php");
-                        ?>
-                    </div>
-                </div>
+                <!-- Sidebar Account Menu -->
+                <?php
+                    include ("components/customer-account-menu.php");
+                ?>
+                <!-- Account Page Content -->
                 <div class="col-lg-8 col-xl-8 m-lr-auto m-b-50 ">
                     <div class="wrap-recent-orders bor10 p-lr-20 p-t-20 p-b-20">
                         <h2>Recent Orders</h2> 
@@ -169,7 +167,7 @@
             <!-- /.container -->
         </div>
         <!-- /#content -->
-        </section>
+    </section>
 
 
     

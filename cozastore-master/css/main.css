@@ -3052,6 +3052,29 @@ table.table-my-orders tr.table_head th {
   font-size: 18px;
 }
 
+.account-listmenu .nav-account li {
+  width: 100%;
+}
+
+.account-listmenu .nav-account li a {
+  color: #000;
+  font-size: 17px;
+  font-weight: 600;
+  width: 100%;
+  display: block;
+  padding: 15px 20px;
+  background: #f3f3f3;
+}
+
+
+.account-listmenu .nav-account li a:hover {
+  background: #717fe0;
+  color: #fff;
+}
+
+.account-listmenu .nav-account li.active a {
+  background: #717fe0;color: #fff;
+}
 
 /*==================================================================
       PSEUDO PSEUDO PSEUDO PSEUDO PSEUDO PSEUDO PSEUDO PSEUDO PSEUDO

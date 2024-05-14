@@ -17,7 +17,7 @@
 						</a>
 						<?php
 						if(isset($_SESSION['sessemail'])){
-							if($_SESSION['sessrole'] == "admin"){
+							if($_SESSION['sessrole'] == "admin" || $_SESSION['sessrole'] == "superadmin" || $_SESSION['sessrole'] == "shop_manager" || $_SESSION['sessrole'] == "sales_person" ){
 						
 						?>
 						<a href="../dashboard" class="flex-c-m p-lr-10 trans-04">
@@ -25,6 +25,15 @@
 						</a>
 						<?php
 							}
+						else{?>
+							<a href="my-account.php" class="flex-c-m p-lr-10 trans-04">
+							Customer Dashboard
+						</a>
+						<a href="logout.php" class="flex-c-m p-lr-10 trans-04">
+							Logout
+						</a>
+						<?php
+						}
 						}
 						if(!isset($_SESSION['sessemail'])){
 						
@@ -34,17 +43,7 @@
 						</a>
 						<?php
 						}
-						if(isset($_SESSION['sessemail'])){
 						
-						?>
-						<a href="my-account.php" class="flex-c-m p-lr-10 trans-04">
-							Customer Dashboard
-						</a>
-						<a href="logout.php" class="flex-c-m p-lr-10 trans-04">
-							Logout
-						</a>
-						<?php
-						}
 						?>
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
