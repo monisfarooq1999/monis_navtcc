@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2024 at 03:07 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Generation Time: May 16, 2024 at 01:58 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `categories` (
   `catid` int(11) NOT NULL,
   `catName` varchar(100) NOT NULL,
   `catImg` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `categories`
@@ -57,7 +57,7 @@ CREATE TABLE `products` (
   `productdesc` varchar(300) NOT NULL,
   `productimg` varchar(300) NOT NULL,
   `productcatid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
@@ -65,7 +65,8 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`productid`, `productname`, `productqty`, `productregprice`, `productsaleprice`, `productdesc`, `productimg`, `productcatid`) VALUES
 (1, 'Kurta Shalwar', 11, '2000', '1900', 'ASDASDASDA', '150x150-01-1.png', 1),
-(2, 'Pant Shirt', 82, '5000', '2400', 'foiasufaosiu', 'WhatsApp Image 2024-05-04 at 00.11.59_c2be1f03.jpg', 2);
+(2, 'Pant Shirt', 82, '5000', '2400', 'foiasufaosiu', 'WhatsApp Image 2024-05-04 at 00.11.59_c2be1f03.jpg', 2),
+(3, 'Kurta Shalwar 3', 23, '3000', '2900', 'adasdas', 'image2.png', 4);
 
 -- --------------------------------------------------------
 
@@ -81,19 +82,20 @@ CREATE TABLE `user` (
   `userphone` varchar(13) NOT NULL,
   `userpass` varchar(255) NOT NULL,
   `userrole` varchar(50) NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`userid`, `firstname`, `lastname`, `useremail`, `userphone`, `userpass`, `userrole`) VALUES
-(1, 'Monis', 'Farooq', 'farooq.ayubie@gmail.com', '03412105345', '$2y$10$1qFnyXLJCuRqCbwj98QVj.IcaJpkUhMcf2NcOc1rAs4Fi2jkdmWnm', 'superadmin'),
+(1, 'Monis', 'Farooq', 'farooq.ayubie@gmail.com', '03412105345', '$2y$10$GqTuLilyRftuUAJSA9ZdLeqYvzvrK4F2vwHhhT2M6K5l.oWobJPIO', 'superadmin'),
 (2, 'Farooq', 'Sethi', 'farooqsethi21@gmail.com', '1231212321321', '$2y$10$1lEnn9xEGwxf/MZP0JDfK.8WgntAHTI2BZNhzHhD7n0M6KcGQGoP.', 'customer'),
 (7, 'Arham', 'Sethi', 'areham@arem.com', '1231212321321', '$2y$10$lzmIRfk15xJz2QBt6QOs9OwBZVpujjYMsOPyNy863hWaSyo1C/C3a', 'shop_manager'),
 (8, 'Siddiq', 'Sethi', 'aslkdj@agkl.com', '1231212321321', '$2y$10$Gu4MWtbm89MhMJuxTSbkg.FRCY7Cj9jlvUf/.vaVh0xxVAAJ6BGJW', 'sales_person'),
 (9, 'Ahmed', 'Sethi', 'admin@madin.com', '1231212321321', '$2y$10$IRk8VuXA1NSnEkz2qF8xEuftHNUmUzGc.7gzuQj11iQFSXRIUqxQG', 'admin'),
-(10, 'Siddiq', 'Hash Dashboard', 'hashdashboard@gmail.com', '123123123', '$2y$10$bQlHafyIP1C0fMa7w9o6AOohW/ui7Gxw3Kzi4ccwIa.Z2n14ogRsi', 'shop_manager');
+(10, 'Siddiq', 'Hash Dashboard', 'hashdashboard@gmail.com', '123123123', '$2y$10$XT0lHfXL5APwJd81CnIo.OJexT7bqOxw2PLEU5s6mHwV/EOaRiBYC', 'shop_manager'),
+(11, '123', '123', '123@com', '123', '$2y$10$e0n/XcWpsramV9lom1Fx1umC1b7Aga0UKVEmbXWkHV3dheeaBYMiC', 'customer');
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,7 @@ CREATE TABLE `userrole` (
   `roleid` int(11) NOT NULL,
   `roles` varchar(20) NOT NULL,
   `roleaccess` varchar(15) NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `userrole`
@@ -161,13 +163,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `productid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `userrole`

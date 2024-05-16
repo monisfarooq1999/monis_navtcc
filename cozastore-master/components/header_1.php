@@ -171,16 +171,12 @@
 						</a>
 						<?php
 							}
-						}
-						if(!isset($_SESSION['sessemail'])){
 						
 						?>
                         <a href="account-login.php" class="flex-c-m p-lr-10 trans-04">
 							Login/Sign Up
 						</a>
 						<?php
-						}
-						if(isset($_SESSION['sessemail'])){
 						
 						?>
 						<a href="my-account.php" class="flex-c-m p-lr-10 trans-04">
