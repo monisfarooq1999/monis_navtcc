@@ -1,5 +1,5 @@
 <?php
-@include ('components/header.php');
+include ('components/header.php');
 if(isset($_GET['pid'])){
     $prodstringid = $_GET['pid'];
     $query = $pdocon->prepare("SELECT * FROM products WHERE productid=:pid");
