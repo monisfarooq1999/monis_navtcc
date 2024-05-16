@@ -223,6 +223,7 @@ if(isset($_POST['adduser'])){
     $useremail = $_POST['useremail'];
     $userphone = $_POST['userphone'];
     $userpass = $_POST['userpass'];
+    $hashPass = password_hash($userpass,PASSWORD_DEFAULT);
     $userrole = $_POST['userrole'];
     
     $query = $pdocon->prepare("INSERT INTO `user`(`firstname`, `lastname`, `useremail`,`userphone`, `userpass`, `userrole`) VALUES(:fn,:ln,:uem,:uph,:upass,:urole)");
@@ -230,7 +231,7 @@ if(isset($_POST['adduser'])){
     $query->bindParam("ln", $lastName);
     $query->bindParam("uem", $useremail);
     $query->bindParam("uph", $userphone);
-    $query->bindParam("upass", $userpass);
+    $query->bindParam("upass", $hashPass , PDO::PARAM_STR);
     $query->bindParam("urole", $userrole);
     $query->execute();
     echo "<script>alert('User added successfully')
@@ -248,7 +249,7 @@ if(isset($_POST['updateuser'])){
     $userphone = $_POST['userphone'];
     $userpass = $_POST['userpass'];
     $userrole = $_POST['userrole'];
-
+    $hashPass = password_hash($userpass,PASSWORD_DEFAULT);
     $query_role = $pdocon->prepare("SELECT userrole FROM user WHERE userid = :uid");
     $query_role->bindParam("uid", $userID);
     $query_role->execute();
@@ -260,7 +261,7 @@ if(isset($_POST['updateuser'])){
     } else {
         if (!empty($_POST['userpass'])) {
             $query = $pdocon->prepare("UPDATE `user` SET firstname = :fn, lastname = :ln, useremail = :uem, userphone = :uph, userpass = :upass, userrole = :urole  WHERE userid = :uid");
-            $query->bindParam("upass", $userpass);
+            $query->bindParam("upass", $hashPass , PDO::PARAM_STR);
         } else {
             $query = $pdocon->prepare("UPDATE `user` SET firstname = :fn, lastname = :ln, useremail = :uem, userphone = :uph, userrole = :urole  WHERE userid = :uid");
         }

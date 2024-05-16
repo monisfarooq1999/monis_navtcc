@@ -1,0 +1,26 @@
+<?php
+
+// Connect to your database (replace placeholders with your actual database credentials)
+$server = "mysql:host=localhost;dbname=dashmin_monis";
+$dbuser = "root";
+$dbpassword = "";
+
+$pdocon = new PDO($server,$dbuser,$dbpassword);
+
+// Fetch users from the database
+$stmt = $pdocon->query("SELECT userid, userpass FROM user");
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($users as $user) {
+    // Hash the password using password_hash() with the default algorithm
+    $hashedPassword = password_hash($user['userpass'], PASSWORD_DEFAULT);
+
+    // Update the user's password in the database with the hashed password
+    $updateStmt = $pdocon->prepare("UPDATE user SET userpass = :hashedPassword WHERE userid = :userId");
+    $updateStmt->bindParam(':hashedPassword', $hashedPassword);
+    $updateStmt->bindParam(':userId', $user['userid']);
+    $updateStmt->execute();
+}
+
+echo "Conversion complete.";
+?>
