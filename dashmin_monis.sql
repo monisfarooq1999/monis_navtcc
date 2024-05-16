@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2024 at 01:58 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: May 17, 2024 at 01:29 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `categories` (
   `catid` int(11) NOT NULL,
   `catName` varchar(100) NOT NULL,
   `catImg` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
@@ -56,17 +56,20 @@ CREATE TABLE `products` (
   `productsaleprice` varchar(20) NOT NULL,
   `productdesc` varchar(300) NOT NULL,
   `productimg` varchar(300) NOT NULL,
-  `productcatid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `productcatid` int(11) NOT NULL,
+  `prodgallery` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`productid`, `productname`, `productqty`, `productregprice`, `productsaleprice`, `productdesc`, `productimg`, `productcatid`) VALUES
-(1, 'Kurta Shalwar', 11, '2000', '1900', 'ASDASDASDA', '150x150-01-1.png', 1),
-(2, 'Pant Shirt', 82, '5000', '2400', 'foiasufaosiu', 'WhatsApp Image 2024-05-04 at 00.11.59_c2be1f03.jpg', 2),
-(3, 'Kurta Shalwar 3', 23, '3000', '2900', 'adasdas', 'image2.png', 4);
+INSERT INTO `products` (`productid`, `productname`, `productqty`, `productregprice`, `productsaleprice`, `productdesc`, `productimg`, `productcatid`, `prodgallery`) VALUES
+(1, 'Kurta Shalwar', 11, '2000', '1900', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus.', '150x150-01-1.png', 1, ''),
+(2, 'Pant Shirt', 82, '5000', '2400', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus.', 'WhatsApp Image 2024-05-04 at 00.11.59_c2be1f03.jpg', 2, ''),
+(3, 'Kurta Shalwar 3', 23, '3000', '2900', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus.', 'image2.png', 4, ''),
+(4, 'Gallery Image Product', 12, '3000', '2500', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus.', 'CertezaDualHeadStethoscopeCR3002_ef83087e-f586-4d5d-966e-a5cf7faebe67_1024x.jpg', 4, '[]'),
+(5, 'Gallery Image Product Test', 12, '3000', '2500', 'Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus.', 'qrCode.png', 1, '[]');
 
 -- --------------------------------------------------------
 
@@ -82,7 +85,7 @@ CREATE TABLE `user` (
   `userphone` varchar(13) NOT NULL,
   `userpass` varchar(255) NOT NULL,
   `userrole` varchar(50) NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
@@ -107,7 +110,7 @@ CREATE TABLE `userrole` (
   `roleid` int(11) NOT NULL,
   `roles` varchar(20) NOT NULL,
   `roleaccess` varchar(15) NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `userrole`
@@ -163,7 +166,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `productid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
