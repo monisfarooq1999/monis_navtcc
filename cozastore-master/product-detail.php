@@ -4,12 +4,12 @@
 
 	if(isset($_GET['pid'])){
 		$prodstringid = $_GET['pid'];
-		$queryprod = $pdocon->prepare("SELECT * FROM products WHERE productid=:pid");
+		$queryprod = $pdocon->prepare("SELECT `products`.*, `categories`.`catname`
+		FROM `products` 
+			INNER JOIN `categories` ON `products`.`productcatid` = `categories`.`catid` WHERE  productid = :pid");
 		$queryprod->bindParam("pid",$prodstringid);
 		$queryprod->execute();
 		$prodData = $queryprod->fetch(PDO::FETCH_ASSOC);
-		$querycat = $pdocon->query(" SELECT catname FROM `products` INNER JOIN categories ON productcatid = catid WHERE productid = $prodstringid; ");
-		$catprodrow = $querycat->fetch(PDO::FETCH_ASSOC);
 	
 	
 	?>
@@ -22,7 +22,7 @@
 			</a>
 
 			<a href="product.php?cid=<?php echo $prodData['productcatid'] ?>" class="stext-109 cl8 hov-cl1 trans-04">
-				<?php echo  $catprodrow['catname']?> 
+				<?php echo  $prodData['catname']?> 
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
@@ -369,7 +369,7 @@
 			</span>
 
 			<span class="stext-107 cl6 p-lr-25">
-				Categories: <?php echo  $catprodrow['catname']?> 
+				Categories: <?php echo  $prodData['catname']?> 
 			</span>
 		</div>
 	</section>
@@ -397,7 +397,8 @@
 				}else{
 					$queryrelatedall = $pdocon->query("SELECT `products`.*, `categories`.`catname`
 					FROM `products` 
-						INNER JOIN `categories` ON `products`.`productcatid` = `categories`.`catid` WHERE productid != $prodstringid");
+						INNER JOIN `categories` ON `products`.`productcatid` = `categories`.`catid` WHERE productid != :pid");
+					$queryrelated->bindParam("pid",$prodstringid);
 					$prorow = $queryrelatedall->fetchAll(PDO::FETCH_ASSOC);
 				
 				}

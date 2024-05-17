@@ -8,7 +8,7 @@
 8. Add to Compare
 9. Quick Add To Cart
 10. PHP Method
-11. Limitation in foreach loop
+11. Limitation in foreach loop  --  https://w3schools.com/php/php_looping_foreach.asp
 12. Importing products with categories from admin panel
 13. session update
 14. parent child hierarchy
@@ -18,3 +18,5 @@
 18. Explode
 19. Gallery Image
 20. Add Review 
+21. Login with SOcial or Google
+22. Shortcode

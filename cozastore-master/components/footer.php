@@ -7,31 +7,29 @@
 					<h4 class="stext-301 cl0 p-b-30">
 						Categories
 					</h4>
+					
 
 					<ul>
-						<li class="p-b-10">
-							<a href="product.php" class="stext-107 cl7 hov-cl1 trans-04">
-								Women
-							</a>
-						</li>
+						<?php
+						$query = $pdocon->query(" SELECT * FROM categories");
+						$cat_row = $query->fetchAll(PDO::FETCH_ASSOC);
+						$limit = 0;
+							foreach($cat_row as $cat_row){
+								if( $limit == 4){
+									break;
+									
+								}
 
-						<li class="p-b-10">
-							<a href="product.php" class="stext-107 cl7 hov-cl1 trans-04">
-								Men
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="product.php" class="stext-107 cl7 hov-cl1 trans-04">
-								Shoes
-							</a>
-						</li>
-
-						<li class="p-b-10">
-							<a href="product.php" class="stext-107 cl7 hov-cl1 trans-04">
-								Watches
-							</a>
-						</li>
+						?>
+							<li class="p-b-10">
+								<a href="product.php?cid=<?php echo  $cat_row['catid']?>" class="stext-107 cl7 hov-cl1 trans-04">
+									<?php echo  $cat_row['catName']?>
+								</a>
+							</li>
+							
+						<?php
+						$limit++;
+						}?>
 					</ul>
 				</div>
 
