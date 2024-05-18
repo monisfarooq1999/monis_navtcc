@@ -5,8 +5,11 @@
 	@include ("components/header_4.php");
 ?>
 	<!-- breadcrumb -->
-	<div class="container">
-		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
+		<h2 class="ltext-105 cl0 txt-center">
+			Shopping Cart
+		</h2>
+		<div class="bread-crumb p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
 				Home
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
@@ -16,9 +19,12 @@
 				Shoping Cart
 			</span>
 		</div>
-	</div>
+	</section>	
 		
-
+<?php
+	$carttotalfooter = 0;
+	if(isset($_SESSION['cart'])){
+?>
 	<!-- Shoping Cart -->
 	<form class="bg0 p-t-75 p-b-85">
 		<div class="container">
@@ -33,55 +39,43 @@
 									<th class="column-3">Price</th>
 									<th class="column-4">Quantity</th>
 									<th class="column-5">Total</th>
+									<th class="column-6">Remove</th>
 								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="images/item-cart-04.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Fresh Strawberries</td>
-									<td class="column-3">$ 36.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
+								<?php
+									foreach ($_SESSION['cart'] as $CartData) {
+										$total = $CartData['orderqty'] * $CartData['prodprice'];
+									
+								?>
+									<tr class="table_row">
+										<td class="column-1">
+											<div class="how-itemcart1">
+												<img src="<?php echo $prodimgref.$CartData['prodimg']?>" alt="IMG">
 											</div>
+										</td>
+										<td class="column-2"><a href="product-detail?pid=<?php echo $CartData['prodid']?>"><?php echo $CartData['prodname']?></a></td>
+										<td class="column-3">Rs. <?php echo $CartData['prodprice']?></td>
+										<td class="column-4">
+											<div class="wrap-num-product flex-w m-l-auto m-r-0">
+												<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+													<i class="fs-16 zmdi zmdi-minus"></i>
+												</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
+												<input class="mtext-104 cl3 txt-center num-product" type="number" name="cartqty" value="<?php echo $CartData['orderqty']?>">
 
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
+												<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+													<i class="fs-16 zmdi zmdi-plus"></i>
+												</div>
 											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 36.00</td>
-								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="images/item-cart-05.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Lightweight Jacket</td>
-									<td class="column-3">$ 16.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 16.00</td>
-								</tr>
+										</td>
+										<td class="column-5">Rs. <?php echo $total ?></td>
+										<td class="column-6">
+											<a href="shoping-cart?deletecart=<?php echo  $CartData['prodid']?>"class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Remove</a>
+										</td>
+									</tr>
+								<?php
+									$carttotalfooter += $total;
+									}
+								?>
 							</table>
 						</div>
 
@@ -116,7 +110,7 @@
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									$79.65
+									Rs. <?php echo $carttotalfooter; ?>
 								</span>
 							</div>
 						</div>
@@ -174,7 +168,7 @@
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									$79.65
+									Rs. <?php echo $carttotalfooter; ?>
 								</span>
 							</div>
 						</div>
@@ -187,7 +181,18 @@
 			</div>
 		</div>
 	</form>
-		
+<?php
+	}else{
+?>
+<section class="bg-img1 txt-center p-lr-15 p-tb-92">
+<h2 class="m-b-20">Your Cart is empty</h2>
+<form action="product">
+<button style="margin: 0 auto;" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">Go Back To Shop Page </button>
+</form>
+</section>
+<?php
+	}
+?>
 	
 		
 

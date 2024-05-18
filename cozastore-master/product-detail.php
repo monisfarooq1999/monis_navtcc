@@ -145,21 +145,37 @@
 
 							<div class="flex-w flex-col-l p-b-10">
 								<div class=" flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-minus"></i>
+									<form method="post" action="shoping-cart">
+									<input type="hidden" name="prodid" value="<?php echo $prodData['productid']?>">
+									<?php
+									if($prodData['productsaleprice'] > '0' ){
+									?>
+										<input type="hidden" name="prodsaleprice" value="<?php echo $prodData['productsaleprice']?>">
+										<input type="hidden" name="prodregprice" value="<?php echo $prodData['productregprice']?>">
+									<?php
+									}else{?>
+										<input type="hidden" name="prodprice" value="<?php echo $prodData['productregprice']?>">
+									<?php
+									}
+									?>
+									<input type="hidden" name="prodname" value="<?php echo $prodData['productname']?>">
+									<input type="hidden" name="prodimg" value="<?php echo $prodData['productimg']?>">
+										<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-minus"></i>
+											</div>
+
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="orderqty" value="1">
+
+											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+												<i class="fs-16 zmdi zmdi-plus"></i>
+											</div>
 										</div>
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-plus"></i>
-										</div>
-									</div>
-
-									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Add to cart
-									</button>
+										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" name="addToCart" type="submit">
+											Add to cart
+										</button>
+									</form>
 								</div>
 							</div>	
 						</div>
@@ -397,8 +413,8 @@
 				}else{
 					$queryrelatedall = $pdocon->query("SELECT `products`.*, `categories`.`catname`
 					FROM `products` 
-						INNER JOIN `categories` ON `products`.`productcatid` = `categories`.`catid` WHERE productid != :pid");
-					$queryrelated->bindParam("pid",$prodstringid);
+						INNER JOIN `categories` ON `products`.`productcatid` = `categories`.`catid` WHERE productid != $prodstringid");
+					
 					$prorow = $queryrelatedall->fetchAll(PDO::FETCH_ASSOC);
 				
 				}

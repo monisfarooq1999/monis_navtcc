@@ -118,5 +118,46 @@ if(isset($_POST['updatePassword'])){
         echo "<script>alert('Re-Type Password does not match');</script>";
     }
 }
+
+
+// Add To Cart
+if(isset($_POST['addToCart'])){
+    $prodid = $_POST['prodid'];
+    $prodname = $_POST['prodname'];
+    if(!empty( $_POST['prodsaleprice'])){
+        $prodprice = $_POST['prodsaleprice'];
+        $prodregprice = $_POST['prodregprice'];
+    }else{
+        $prodprice = $_POST['prodprice'];   
+    }
+        $prodimg = $_POST['prodimg'];
+        $orderqty = $_POST['orderqty'];
+    if(isset( $_SESSION['cart'])){
+        $count = count($_SESSION['cart']);
+        $_SESSION['cart'][$count]
+            = array("prodid" => $prodid, "prodname" => $prodname, "prodprice" => $prodprice, "prodimg" => $prodimg, "orderqty" => $orderqty);
+        echo "<script>alert('Another Product Added to Cart')</script>";
+    }else{
+            $_SESSION['cart'][0] = array("prodid" => $prodid, "prodname" => $prodname, "prodprice" => $prodprice, "prodimg" => $prodimg, "orderqty" => $orderqty);
+            echo "<script>alert('Product Added to Cart');</script>";
+        }
+    
+}
+
+// Remove From Cart
+
+if(isset($_GET['deletecart'])){
+    $cartdelid = $_GET['deletecart'];
+    foreach($_SESSION['cart'] as $key => $values){
+        if($values['prodid'] == $cartdelid){
+            unset($_SESSION['cart'][$key]);
+            $_SESSION['cart'] = array_values($_SESSION['cart']);
+            echo "<script>alert('Product Removed From Cart');
+            locatio.assign('shoping-cart')</script>";
+        }
+    }
+}
+
+
 ?>
 
