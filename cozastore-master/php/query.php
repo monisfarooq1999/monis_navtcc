@@ -120,10 +120,11 @@ if(isset($_POST['updatePassword'])){
 }
 
 
-// Add To Cart
+// Cart Handling
 if(isset($_POST['addToCart'])){
     $prodid = $_POST['prodid'];
     $prodname = $_POST['prodname'];
+    
     if(!empty( $_POST['prodsaleprice'])){
         $prodprice = $_POST['prodsaleprice'];
         $prodregprice = $_POST['prodregprice'];
@@ -133,15 +134,62 @@ if(isset($_POST['addToCart'])){
         $prodimg = $_POST['prodimg'];
         $orderqty = $_POST['orderqty'];
     if(isset( $_SESSION['cart'])){
+        // Update Cart
+        $prod_found = false;
+        foreach($_SESSION['cart'] as $key => $values){
+            if($values['prodid'] == $prodid){
+                $_SESSION['cart'][$key]['orderqty'] += $orderqty;
+                $prod_found = true;
+                echo "<script>alert('Product quantity updated in the cart');</script>";
+                break;
+            }
+        }
+        // Add New Cart
+        if(!$prod_found){
         $count = count($_SESSION['cart']);
         $_SESSION['cart'][$count]
             = array("prodid" => $prodid, "prodname" => $prodname, "prodprice" => $prodprice, "prodimg" => $prodimg, "orderqty" => $orderqty);
-        echo "<script>alert('Another Product Added to Cart')</script>";
+        echo "<script>alert('New Product Added to Cart')</script>";
+        }
     }else{
             $_SESSION['cart'][0] = array("prodid" => $prodid, "prodname" => $prodname, "prodprice" => $prodprice, "prodimg" => $prodimg, "orderqty" => $orderqty);
             echo "<script>alert('Product Added to Cart');</script>";
         }
     
+}
+
+
+// Update Cart Quantity From Cart Page
+if(isset($_POST['updatecartqty'])){
+    $prodids = $_POST['prodid'];
+    $newqtys = $_POST['cartqty'];
+
+    // Ensure both arrays have the same number of elements
+    if(count($prodids) == count($newqtys)) {
+        for($i = 0; $i < count($prodids); $i++) {
+            $prodid = $prodids[$i];
+            $newqty = $newqtys[$i];
+
+            // Loop through the cart and update the quantities
+            foreach($_SESSION['cart'] as $key => $values){
+                if($values['prodid'] == $prodid){
+                    // Debugging alert before updating the quantity
+                    echo "<script>console.log('Product quantity before update: " . $_SESSION['cart'][$key]['orderqty'] . "');</script>";
+
+                    // Update the quantity
+                    $_SESSION['cart'][$key]['orderqty'] = $newqty;
+
+                    // Debugging alert after updating the quantity
+                    echo "<script>console.log('Product quantity updated for prodid: " . $prodid . ". New qty: " . $newqty . "');</script>";
+                    break;
+                }
+            }
+        }
+
+        echo "<script>alert('Cart updated successfully');</script>";
+    } else {
+        echo "<script>alert('Error: Mismatched product and quantity data');</script>";
+    }
 }
 
 // Remove From Cart
@@ -156,6 +204,38 @@ if(isset($_GET['deletecart'])){
             locatio.assign('shoping-cart')</script>";
         }
     }
+}
+
+//Review  Add Review
+if(isset($_POST['reviewpost'])){
+    $fromuserid = $_POST['fromuserid'];
+    $pordid = $_POST['prodid'];
+    $reviewrating = $_POST['rating'];
+    $review = $_POST['review'];
+    $fromname = $_POST['fromname'];
+    $fromemail = $_POST['fromemail'];
+    $query = $pdocon->prepare("INSERT INTO `product_review`(`fromname`, `fromemail`, `review`, `reviewrating`, `prodfor`, `fromuserid`) VALUES (:fromname,:fromemail,:review,:reviewrating,:prodfor,:fromuserid)");
+    $query->bindParam("fromname",$fromname);
+    $query->bindParam("fromemail",$fromemail);
+    $query->bindParam("review",$review);
+    $query->bindParam("reviewrating",$reviewrating);
+    $query->bindParam("prodfor", $pordid);
+    $query->bindParam("fromuserid", $fromuserid);
+    $query->execute();
+
+    echo '<script>alert("Thank you for your Review");</script>';
+}
+
+// Delete User Review
+if(isset($_GET['deletereview'])){
+    $reviewdelid = $_GET['deletereview'];
+    $prodid = $_GET['pid'];
+    $query= $pdocon->prepare("DELETE FROM product_review Where reviewid = :rid");
+    $query->bindParam("rid", $reviewdelid);
+    $query->execute();
+    echo "<script>alert('Review Deleted');
+    location.assign('product-detail?pid=" . $prodid ."');
+    </script>";
 }
 
 

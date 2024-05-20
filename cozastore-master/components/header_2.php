@@ -55,8 +55,17 @@
 						</div>
 							
 						<div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
-								<i class="zmdi zmdi-shopping-cart"></i>
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="<?php 
+						$cartCount = 0;
+						if(isset($_SESSION['cart'])){
+							foreach($_SESSION['cart'] as $cartData){
+								$cartCount += $cartData['orderqty'];
+							}
+							echo $cartCount;
+						}else{
+							echo $cartCount;
+						}?>">
+							<i class="zmdi zmdi-shopping-cart"></i>
 							</div>
 						</div>
 							

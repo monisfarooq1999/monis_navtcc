@@ -10,6 +10,13 @@
 		$queryprod->bindParam("pid",$prodstringid);
 		$queryprod->execute();
 		$prodData = $queryprod->fetch(PDO::FETCH_ASSOC);
+		$queryreview = $pdocon->prepare("SELECT `product_review`.*, `user`.`userid`, `products`.`productid`
+		FROM `product_review` 
+			LEFT JOIN `user` ON `product_review`.`fromuserid` = `user`.`userid` 
+			LEFT JOIN `products` ON `product_review`.`prodfor` = `products`.`productid` WHERE prodfor = :pid;");
+		$queryreview->bindParam("pid",$prodstringid);
+		$queryreview->execute();
+		$reviewData = $queryreview->fetchAll(PDO::FETCH_ASSOC);
 	
 	
 	?>
@@ -145,7 +152,7 @@
 
 							<div class="flex-w flex-col-l p-b-10">
 								<div class=" flex-w flex-m respon6-next">
-									<form method="post" action="shoping-cart">
+									<form method="post" action="">
 									<input type="hidden" name="prodid" value="<?php echo $prodData['productid']?>">
 									<?php
 									if($prodData['productsaleprice'] > '0' ){
@@ -218,7 +225,12 @@
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (<?php 
+						$reviewCount = 0;
+						if(isset($reviewData)){
+							$reviewCount = count($reviewData);
+							echo $reviewCount;
+						}?>)</a>
 						</li>
 					</ul>
 
@@ -298,6 +310,10 @@
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
 									<div class="p-b-30 m-lr-15-sm">
 										<!-- Review -->
+										<?php
+										foreach($reviewData as $reviewData){
+
+										?>
 										<div class="flex-w flex-t p-b-68">
 											<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
 												<img src="images/avatar-01.jpg" alt="AVATAR">
@@ -306,26 +322,52 @@
 											<div class="size-207">
 												<div class="flex-w flex-sb-m p-b-17">
 													<span class="mtext-107 cl2 p-r-20">
-														Ariana Grande
+														<?php echo $reviewData['fromname']?>
 													</span>
 
 													<span class="fs-18 cl11">
+													<?php
+													$reviewrating = $reviewData['reviewrating']; 
+													$maxStars = 5;
+													for ($i = 1; $i <= $maxStars; $i++) {
+														if ($i <= $reviewrating) {
+													?>
 														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star-half"></i>
+													<?php
+														} else {
+													?>
+														<i class="zmdi zmdi-star-outline"></i>
+													<?php
+														}
+													}
+													?>
 													</span>
 												</div>
 
 												<p class="stext-102 cl6">
-													Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
+													<?php echo $reviewData['review']?>
 												</p>
+												<?php
+												if(isset($_SESSION['sessid'])){
+													if($_SESSION['sessid'] == $reviewData['fromuserid']){
+												?>
+												<div class="flex-w flex-col-r">
+													<a class="cl2" href="product-detail?pid=<?php echo $prodstringid?>&deletereview=<?php echo $reviewData['reviewid']?>">Delete Review</a>
+												</div>
+
+												<?php
+													}
+												}
+												?>
+												
 											</div>
 										</div>
-										
+										<?php
+										}
+										?>
 										<!-- Add review -->
-										<form class="w-full">
+										<form class="w-full" method="post">
+											<input type="hidden" name="prodid" value="<?php echo $prodData['productid']?>">
 											<h5 class="mtext-108 cl2 p-b-7">
 												Add a review
 											</h5>
@@ -345,28 +387,41 @@
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<input class="dis-none" type="number" name="rating">
+													<input class="dis-none" type="number" name="rating" min="1" required>
 												</span>
 											</div>
 
 											<div class="row p-b-25">
 												<div class="col-12 p-b-5">
 													<label class="stext-102 cl3" for="review">Your review</label>
-													<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+													<textarea required class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
 												</div>
-
+												
+												<?php
+												if(isset($_SESSION['sessid'])){
+												?>
+												<input type="hidden" name="fromuserid" value="<?php echo $_SESSION['sessid']?>">
+												<input type="hidden" name="fromname" value="<?php echo $_SESSION['sessfname'] . ' ' . $_SESSION['sesslname']?>">
+												<input type="hidden" name="fromemail" value="<?php echo $_SESSION['sessemail']?>">
+												<?php
+												}else{
+												?>
+												<input type="hidden" name="fromuserid" value="12">
 												<div class="col-sm-6 p-b-5">
 													<label class="stext-102 cl3" for="name">Name</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
+													<input required class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="fromname">
 												</div>
 
 												<div class="col-sm-6 p-b-5">
 													<label class="stext-102 cl3" for="email">Email</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
+													<input required class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="fromemail">
 												</div>
+												<?php
+												}
+												?>
 											</div>
 
-											<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+											<button type="submit" name="reviewpost" class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
 												Submit
 											</button>
 										</form>

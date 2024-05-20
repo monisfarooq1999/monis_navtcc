@@ -1023,7 +1023,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 /*---------------------------------------------*/
 .header-cart-item-txt {
-  width: calc(100% - 80px);
+  width: calc(100% - 100px);
 }
 
 .header-cart-item-name {

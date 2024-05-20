@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2024 at 01:29 AM
+-- Generation Time: May 20, 2024 at 06:41 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -74,6 +74,31 @@ INSERT INTO `products` (`productid`, `productname`, `productqty`, `productregpri
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `product_review`
+--
+
+CREATE TABLE `product_review` (
+  `reviewid` int(11) NOT NULL,
+  `fromname` varchar(50) NOT NULL,
+  `fromemail` varchar(75) NOT NULL,
+  `review` varchar(400) NOT NULL,
+  `reviewrating` int(11) NOT NULL,
+  `prodfor` int(11) NOT NULL,
+  `fromuserid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product_review`
+--
+
+INSERT INTO `product_review` (`reviewid`, `fromname`, `fromemail`, `review`, `reviewrating`, `prodfor`, `fromuserid`) VALUES
+(2, 'Monis Farooq', 'farooq.ayubie@gmail.com', ' Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos ', 5, 2, 1),
+(4, 'Monis Farooq Ayubi', 'monis@monis.com', ' Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos ', 5, 1, 12),
+(5, 'Farooq Sethi', 'farooqsethi@gmail.com', ' Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. ', 5, 2, 12);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -98,7 +123,8 @@ INSERT INTO `user` (`userid`, `firstname`, `lastname`, `useremail`, `userphone`,
 (8, 'Siddiq', 'Sethi', 'aslkdj@agkl.com', '1231212321321', '$2y$10$Gu4MWtbm89MhMJuxTSbkg.FRCY7Cj9jlvUf/.vaVh0xxVAAJ6BGJW', 'sales_person'),
 (9, 'Ahmed', 'Sethi', 'admin@madin.com', '1231212321321', '$2y$10$IRk8VuXA1NSnEkz2qF8xEuftHNUmUzGc.7gzuQj11iQFSXRIUqxQG', 'admin'),
 (10, 'Siddiq', 'Hash Dashboard', 'hashdashboard@gmail.com', '123123123', '$2y$10$XT0lHfXL5APwJd81CnIo.OJexT7bqOxw2PLEU5s6mHwV/EOaRiBYC', 'shop_manager'),
-(11, '123', '123', '123@com', '123', '$2y$10$e0n/XcWpsramV9lom1Fx1umC1b7Aga0UKVEmbXWkHV3dheeaBYMiC', 'customer');
+(11, '123', '123', '123@com', '123', '$2y$10$e0n/XcWpsramV9lom1Fx1umC1b7Aga0UKVEmbXWkHV3dheeaBYMiC', 'customer'),
+(12, 'Guest', 'Customer', 'guestcustomer@monis.com', '123123123', '123', 'customer');
 
 -- --------------------------------------------------------
 
@@ -140,6 +166,14 @@ ALTER TABLE `products`
   ADD KEY `productcatid` (`productcatid`);
 
 --
+-- Indexes for table `product_review`
+--
+ALTER TABLE `product_review`
+  ADD PRIMARY KEY (`reviewid`),
+  ADD KEY `prodfor` (`prodfor`),
+  ADD KEY `userid` (`fromuserid`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -169,10 +203,16 @@ ALTER TABLE `products`
   MODIFY `productid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `product_review`
+--
+ALTER TABLE `product_review`
+  MODIFY `reviewid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `userrole`
@@ -189,6 +229,13 @@ ALTER TABLE `userrole`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`productcatid`) REFERENCES `categories` (`catid`);
+
+--
+-- Constraints for table `product_review`
+--
+ALTER TABLE `product_review`
+  ADD CONSTRAINT `product_review_ibfk_1` FOREIGN KEY (`prodfor`) REFERENCES `products` (`productid`),
+  ADD CONSTRAINT `product_review_ibfk_2` FOREIGN KEY (`fromuserid`) REFERENCES `user` (`userid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

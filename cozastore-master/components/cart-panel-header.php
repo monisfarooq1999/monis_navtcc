@@ -28,7 +28,7 @@
 							<img src="<?php echo $prodimgref.$cartData['prodimg']?>" alt="IMG">
 						</div>
 
-						<div class="header-cart-item-txt p-t-8">
+						<div class="header-cart-item-txt">
 							<a href="<?php echo $cartData['prodid']?>" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                 <?php echo $cartData['prodname']?>
 							</a>
@@ -40,6 +40,9 @@
                                 <?php  $carttotalprod = $cartData['orderqty'] *   $cartData['prodprice'];
                                 echo 'Rs. ' . $carttotalprod ;?>
 							</span>
+						</div>
+						<div class="p-lr-5 pointer hov-cl1 trans-04 " style="width:20px;">
+							<a href="?deletecart=<?php echo  $cartData['prodid']?>"class="cl2"><i class="zmdi zmdi-close"></i></a>
 						</div>
 					</li>
                     <?php 
