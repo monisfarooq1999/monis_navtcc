@@ -29,11 +29,13 @@
 							<a href="my-account.php" class="flex-c-m p-lr-10 trans-04">
 							Customer Dashboard
 						</a>
+						<?php
+						}
+						?>
 						<a href="logout.php" class="flex-c-m p-lr-10 trans-04">
 							Logout
 						</a>
 						<?php
-						}
 						}
 						if(!isset($_SESSION['sessemail'])){
 						

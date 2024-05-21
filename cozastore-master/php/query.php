@@ -238,6 +238,7 @@ if(isset($_GET['deletereview'])){
     </script>";
 }
 
+// Place Order
 
 ?>
 
