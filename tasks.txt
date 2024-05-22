@@ -20,3 +20,7 @@
 20. Add Review 
 21. Login with SOcial or Google
 22. Shortcode
+
+
+
+Add Address in user addition, update, list, in dashmin and my account

@@ -1,6 +1,6 @@
 <?php
 	session_start();
-    session_unset();
+    unset($_SESSION['sessemail']);
     echo "<script>
     alert('User Logout');
     location.assign('account-login.php')</script>";

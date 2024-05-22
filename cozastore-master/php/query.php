@@ -35,7 +35,13 @@ if(isset($_POST['updatedetails'])){
     $userlastname = $_POST['lastname'];
     $useremail = $_POST['useremail'];
     $userphone = $_POST['userphone'];
+    $useraddress = $_POST['useraddress'];
+    if(!empty($_POST['useraddress'])){
+    $query = $pdocon->prepare("UPDATE user SET firstname = :ufname, lastname = :ulname,  userphone = :uphone, useremail = :uemail, useraddress = :uadd WHERE userid = :uid");
+    $query->bindParam("uadd",$useraddress);
+    }else{
     $query = $pdocon->prepare("UPDATE user SET firstname = :ufname, lastname = :ulname,  userphone = :uphone, useremail = :uemail WHERE userid = :uid");
+    }
     $query->bindParam("uid",$userid);
     $query->bindParam("ufname",$userfirstname);
     $query->bindParam("ulname",$userlastname);
@@ -75,6 +81,7 @@ if(isset($_POST['userlogin'])){
             $_SESSION['sessphone'] = $userData['userphone'];
             $_SESSION['sessrole'] = $userData['userrole'];
             $_SESSION['sesspass'] = $userData['userpass'];
+            $_SESSION['sessaddress'] = $userData['useraddress'];
             if($_SESSION['sessrole'] == "user" || $_SESSION['sessrole'] == "customer" ){
                 echo "<script>alert('User Login Successful');
                 location.assign('my-account.php');
@@ -239,6 +246,73 @@ if(isset($_GET['deletereview'])){
 }
 
 // Place Order
+// if(isset($_POST['placeorder'])){
+//     $confirmationkey = rand(1, 999999);
+//     echo "<script>
+//     alert('" . $confirmationkey . "');</script>";
+
+// }
+if(isset($_POST['placeorder'])){
+    date_default_timezone_set("Asia/karachi");
+    $now = time();
+    $dateString = date("Y-m-d H:i:s", $now);
+    $time = date("H:i:s", strtotime($dateString));
+    // echo "<script>
+    // alert('" . $dateString . "')
+    // alert('" . $time . "')</script>";
+    $custid = $_POST['custid'];
+    $userfname = $_POST['userfirstname'];
+    $userlname = $_POST['userlastname'];
+    $useremail = $_POST['useremail'];
+    $userphone = $_POST['userphone'];
+    $custaddress = $_POST['custaddress'];
+    $confirmationkey = rand(1, 999999);
+    //Order Create
+    foreach ($_SESSION['cart'] as $orderkey => $ordervalues) {
+        $proid = $ordervalues['prodid'];
+        $prodname = $ordervalues['prodname'];
+        $orderqty = $ordervalues['orderqty'];
+        $prodprice = $ordervalues['prodprice'];
+        $prodimg = $ordervalues['prodimg'];
+        $orderQuery = $pdocon->prepare("INSERT INTO `orders`( `itemid`, `itemname`, `itemqty`, `itemprice`, `custid`, `orderdate`, `ordertime`, `itemimg`,`confirmationkeyodr`) VALUES(:opi,:opn,:opq,:opp,:oui,:od,:ot,:opim,:ck)");
+        $orderQuery->bindParam("opi", $proid);
+        $orderQuery->bindParam("opn", $prodname);
+        $orderQuery->bindParam("opq", $orderqty);
+        $orderQuery->bindParam("opp", $prodprice);
+        $orderQuery->bindParam("oui", $custid);
+        $orderQuery->bindParam("opim", $prodimg);
+        $orderQuery->bindParam("od", $dateString);
+        $orderQuery->bindParam("ot", $time);
+        $orderQuery->bindParam("ck", $confirmationkey);
+        $orderQuery->execute();
+    }
+    //Invoice Create
+    $itemcount = count($_SESSION['cart']);
+    $totalqty = 0;
+    $totalamount = 0;
+    $invoiceQuery = $pdocon->prepare("INSERT INTO `invoices`( `custid`, `custemail`,`userphone`, `userfname`, `userlname`, `useraddress`, `itemcount`, `totalqty`, `totalamount`, `invoicedate`, `invoicetime`,`confirmationkey`) VALUES(:iui,:iue,:iup,:iufn,:iuln,:iuadd,:itc,:itq,:ita,:id,:it,:ck)");
+    $invoiceQuery->bindParam("iui", $custid);
+    $invoiceQuery->bindParam("iue", $useremail);
+    $invoiceQuery->bindParam("iup", $userphone);
+    $invoiceQuery->bindParam("iufn", $userfname);
+    $invoiceQuery->bindParam("iuln", $userlname);
+    $invoiceQuery->bindParam("iuadd", $custaddress);
+    $invoiceQuery->bindParam("itc", $itemcount);
+    $invoiceQuery->bindParam("id", $dateString);
+    $invoiceQuery->bindParam("it", $time);
+    $invoiceQuery->bindParam("ck", $confirmationkey);
+    foreach ($_SESSION['cart'] as $invoicevalues) {
+        $totalqty += $invoicevalues['orderqty'];
+        $totalamount += $invoicevalues['orderqty'] * $invoicevalues['prodprice'];
+    }
+    $invoiceQuery->bindParam("itq", $totalqty);
+    $invoiceQuery->bindParam("ita", $totalamount);
+    $invoiceQuery->execute();
+    unset($_SESSION['cart']);
+    echo "<script>alert('order placed successfully');
+    location.assign('thankyou?odr=" . $confirmationkey ."');
+    </script>";
+}
+
 
 ?>
-

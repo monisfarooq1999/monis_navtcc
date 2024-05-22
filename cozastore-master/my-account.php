@@ -67,47 +67,7 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="company">Company</label>
-                                        <input type="text" class="form-control" id="company">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="street">Street</label>
-                                        <input type="text" class="form-control" id="street">
-                                    </div>
-                                </div>
-                            </div> -->
-
                             <div class="row">
-                                <!-- <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="city">Company</label>
-                                        <input type="text" class="form-control" id="city">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="zip">ZIP</label>
-                                        <input type="text" class="form-control" id="zip">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="state">State</label>
-                                        <select class="form-control" id="state"></select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="country">Country</label>
-                                        <select class="form-control" id="country"></select>
-                                    </div>
-                                </div> -->
-
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="phone">Telephone</label>
@@ -118,6 +78,12 @@
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="text" class="form-control" id="email" value="<?php echo $_SESSION['sessemail']?>" name="useremail">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <textarea type="text" class="form-control" id="address" name="useraddress"><?php if(!empty($_SESSION['sessaddress'])){ echo $_SESSION['sessaddress']; }?></textarea>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 text-center">

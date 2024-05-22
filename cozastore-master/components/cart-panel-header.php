@@ -29,7 +29,7 @@
 						</div>
 
 						<div class="header-cart-item-txt">
-							<a href="<?php echo $cartData['prodid']?>" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							<a href="product-detail?pid=<?php echo $cartData['prodid']?>" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                 <?php echo $cartData['prodname']?>
 							</a>
 

@@ -76,16 +76,17 @@
 							<img class="how-pos4 pointer-none" src="images/icons/phone.png"  width="20px"  alt="ICON">
 						</div>
 						<div class="bor8 m-b-20 how-pos4-parent">
-							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" required type="text" name="custaddress" placeholder="Address">
-							<img class="how-pos4 pointer-none" src="images/icons/password.png"  width="20px"  alt="ICON">
+                            <textarea class="stext-111 cl2 size-116 p-l-10 p-tb-10" required type="text" name="custaddress" placeholder="Address"></textarea>
 						</div>
 
 						<button type="submit" name="placeorder" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">Place Order</button>
 					</form>
                 </div>
-                    <?php
-                    }else{
-                    ?>
+                
+                <?php
+                // logged in
+                }else{
+                ?>
                 <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
                     <form method="post">
                         <h4 class="mtext-105 cl2 txt-center p-b-30">
@@ -110,8 +111,8 @@
                             <img class="how-pos4 pointer-none" src="images/icons/phone.png"  width="20px"  alt="ICON">
                         </div>
                         <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" required type="text" name="address" placeholder="Address">
-                            <img class="how-pos4 pointer-none" src="images/icons/password.png"  width="20px"  alt="ICON">
+                            <textarea class="stext-111 cl2 size-116 p-l-10 p-tb-10" required type="text" name="custaddress" placeholder="Address"><?php if(!empty($_SESSION['sessaddress'])){ echo $_SESSION['sessaddress']; }?></textarea>
+                            
                         </div>
 
                         <button type="submit" name="placeorder" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
@@ -143,7 +144,7 @@
                                 </div>
 
                                 <div class="header-cart-item-txt">
-                                    <a href="<?php echo $cartData['prodid']?>" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                                    <a href="product-detail?pid=<?php echo $cartData['prodid']?>" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                         <?php echo $cartData['prodname']?>
                                     </a>
 
