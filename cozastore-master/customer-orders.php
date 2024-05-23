@@ -1,9 +1,12 @@
 <?php
-	@include ("components/header.php");
-?>
-
-<?php
-	@include ("components/header_1.php");
+	include ("components/header.php");
+	include ("components/header_1.php");
+    if(isset($_SESSION['sessid'])){
+        $userid = $_SESSION['sessid'];
+		$queryaccount = $pdocon->prepare("SELECT * FROM `invoices` WHERE  custid = :custid");
+		$queryaccount->bindParam("custid",$userid);
+		$queryaccount->execute();
+        $accdata = $queryaccount->fetchAll(PDO::FETCH_ASSOC);
 ?>
 	
 
@@ -19,7 +22,7 @@
 			<div class="flex-w flex-tr">
 
                 <?php
-                    @include ("components/customer-account-menu.php");
+                    include ("components/customer-account-menu.php");
                 ?>
 
                 <div class="col-lg-8 col-xl-8 m-lr-auto m-b-50 " id="customer-order">
@@ -126,30 +129,18 @@
                                     <th class="column-4">Total</th>
                                 </tr>
 
+                                <?php
+                                foreach ($accdata as $accdata) {
+                                ?>
                                 <tr class="table_row">
-                                    <td class="column-1">
-                                        ORD - 21453
-                                    </td>
-                                    <td class="column-2">13-02-2024</td>
-                                    <td class="column-3">Out Of Factory</td>
-                                    <td class="column-4">$ 36.00</td>
+                                    <td class="column-1"><a href="thankyou?odr=<?php echo $accdata['confirmationkey'] ?>">ODR - <?php echo $accdata['confirmationkey'] ?></a></td>
+                                    <td class="column-2"><?php echo $accdata['invoicedate'] ?></td>
+                                    <td class="column-3"><?php echo $accdata['orderstatus'] ?></td>
+                                    <td class="column-4">Rs. <?php echo $accdata['totalamount'] ?></td>
                                 </tr>
-                                <tr class="table_row">
-                                    <td class="column-1">
-                                        ORD - 21453
-                                    </td>
-                                    <td class="column-2">13-01-2024</td>
-                                    <td class="column-3">Out Of Factory</td>
-                                    <td class="column-4">$ 36.00</td>
-                                </tr>
-                                <tr class="table_row">
-                                    <td class="column-1">
-                                        ORD - 21453
-                                    </td>
-                                    <td class="column-2">13-05-2024</td>
-                                    <td class="column-3">Out Of Factory</td>
-                                    <td class="column-4">$ 36.00</td>
-                                </tr>
+                                <?php
+                                }
+                                ?>
 
                             </table>
                         </div>
@@ -163,5 +154,6 @@
     </section>
 
 <?php
-	@include ("components/footer.php");
+    }
+    include ("components/footer.php");
 ?>

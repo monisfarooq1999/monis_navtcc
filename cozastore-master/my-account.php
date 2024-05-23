@@ -1,9 +1,12 @@
 <?php
 	include ("components/header.php");
-?>
-
-<?php
 	include ("components/header_1.php");
+    if(isset($_SESSION['sessid'])){
+        $userid = $_SESSION['sessid'];
+		$queryaccount = $pdocon->prepare("SELECT * FROM `invoices` WHERE  custid = :custid LIMIT 5");
+		$queryaccount->bindParam("custid",$userid);
+		$queryaccount->execute();
+        $accdata = $queryaccount->fetchAll(PDO::FETCH_ASSOC);
 ?>
 	
 
@@ -34,15 +37,18 @@
                                     <th class="column-3">Order Status</th>
                                     <th class="column-4">Total</th>
                                 </tr>
-
+                                <?php
+                                foreach ($accdata as $accdata) {
+                                ?>
                                 <tr class="table_row">
-                                    <td class="column-1">
-                                        ORD - 21453
-                                    </td>
-                                    <td class="column-2">13-05-2024</td>
-                                    <td class="column-3">Out Of Factory</td>
-                                    <td class="column-4">$ 36.00</td>
+                                    <td class="column-1"><a href="thankyou?odr=<?php echo $accdata['confirmationkey'] ?>">ODR - <?php echo $accdata['confirmationkey'] ?></a></td>
+                                    <td class="column-2"><?php echo $accdata['invoicedate'] ?></td>
+                                    <td class="column-3"><?php echo $accdata['orderstatus'] ?></td>
+                                    <td class="column-4">Rs. <?php echo $accdata['totalamount'] ?></td>
                                 </tr>
+                                <?php
+                                }
+                                ?>
 
                             </table>
                         </div>
@@ -136,5 +142,6 @@
     
 
 <?php
+    }
 	include ("components/footer.php");
 ?>

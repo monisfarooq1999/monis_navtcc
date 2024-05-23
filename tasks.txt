@@ -23,4 +23,8 @@
 
 
 
-Add Address in user addition, update, list, in dashmin and my account
+Add Address in user addition, update, list, in dashmin and my account - remaining in dashmin
+complete file inclusion in email body
+File Attachment of invoice pdf with email  {
+    run time pdf conversion and attachment
+}
